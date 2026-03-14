@@ -2,27 +2,37 @@
 
 {% block content %}
 
-<h2 class="text-2xl font-bold mb-6">
+<div class="max-w-2xl">
+
+<div class="flex justify-between items-center mb-8">
+
+<h2 class="text-2xl font-bold mb-8">
 Crear PQR
 </h2>
+<a href="/pqr/"
+class="text-sm bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg transition">
+Volver
+</a>
 
-<form method="post" class="bg-white p-6 shadow rounded">
+</div>
+<form method="post"
+class="bg-slate-900/60 backdrop-blur-xl p-10 rounded-2xl border border-slate-700 space-y-6 shadow-lg">
 
 {% csrf_token %}
 
-<div class="mb-4">
+<div>
 
-<label class="block text-gray-600">
-Titulo
+<label class="block text-sm text-gray-400 mb-2">
+Título
 </label>
 
 {{ form.title }}
 
 </div>
 
-<div class="mb-4">
+<div>
 
-<label>
+<label class="block text-sm text-gray-400 mb-2">
 Descripción
 </label>
 
@@ -30,9 +40,9 @@ Descripción
 
 </div>
 
-<div class="mb-4">
+<div>
 
-<label>
+<label class="block text-sm text-gray-400 mb-2">
 Estado
 </label>
 
@@ -40,12 +50,15 @@ Estado
 
 </div>
 
-<button class="bg-indigo-600 text-white px-4 py-2 rounded">
+<button
+class="bg-indigo-600 hover:bg-indigo-500 px-6 py-2 rounded-lg font-medium transition shadow-md">
 
 Guardar
 
 </button>
 
 </form>
+
+</div>
 
 {% endblock %}

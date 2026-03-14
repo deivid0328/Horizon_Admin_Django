@@ -2,29 +2,33 @@
 
 {% block content %}
 
-<div class="flex justify-between mb-6">
+<div class="flex justify-between items-center mb-8">
 
-<h2 class="text-2xl font-bold">Gestión de PQR</h2>
+<h2 class="text-2xl font-bold">
+Gestión de PQR
+</h2>
 
-<a href="/pqr/create/" class="bg-indigo-600 text-white px-4 py-2 rounded">
+<a href="/pqr/create/" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2 rounded-lg text-sm">
 Nueva PQR
 </a>
 
 </div>
 
-<table class="w-full bg-white shadow rounded">
+<div class="bg-slate-900/60 backdrop-blur rounded-xl border border-slate-700 overflow-hidden">
 
-<thead class="bg-gray-200">
+<table class="w-full">
+
+<thead class="bg-slate-800 text-gray-400 text-sm">
 
 <tr>
 
-<th class="p-3">Titulo</th>
+<th class="p-4 text-left">Título</th>
 
-<th>Estado</th>
+<th class="p-4 text-left">Estado</th>
 
-<th>Fecha</th>
+<th class="p-4 text-left">Fecha</th>
 
-<th>Acciones</th>
+<th class="p-4 text-left">Acciones</th>
 
 </tr>
 
@@ -34,21 +38,51 @@ Nueva PQR
 
 {% for item in pqr %}
 
-<tr class="border-t">
+<tr class="border-t border-slate-700 hover:bg-slate-800 transition">
 
-<td class="p-3">{{item.title}}</td>
+<td class="p-4">
 
-<td>{{item.status}}</td>
+{{ item.title }}
 
-<td>{{item.created_at}}</td>
+</td>
 
-<td class="space-x-2">
+<td class="p-4">
 
-<a href="/pqr/{{item.id}}" class="text-blue-600">
+{% if item.status == "open" %}
+
+<span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs">
+Abierto
+</span>
+
+{% elif item.status == "process" %}
+
+<span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs">
+En proceso
+</span>
+
+{% else %}
+
+<span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs">
+Cerrado
+</span>
+
+{% endif %}
+
+</td>
+
+<td class="p-4 text-gray-400 text-sm">
+
+{{ item.created_at }}
+
+</td>
+
+<td class="p-4 space-x-3 text-sm">
+
+<a href="/pqr/{{item.id}}" class="text-indigo-400 hover:text-indigo-300">
 Ver
 </a>
 
-<a href="/pqr/{{item.id}}/delete" class="text-red-600">
+<a href="/pqr/{{item.id}}/delete" class="text-red-400 hover:text-red-300">
 Eliminar
 </a>
 
@@ -61,5 +95,7 @@ Eliminar
 </tbody>
 
 </table>
+
+</div>
 
 {% endblock %}
