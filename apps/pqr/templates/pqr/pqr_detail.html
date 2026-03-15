@@ -4,121 +4,119 @@
 
 <div class="max-w-3xl">
 
-<div class="flex justify-between items-center mb-8">
+    <div class="flex justify-between items-center mb-8">
 
-<h2 class="text-2xl font-bold">
-Detalle de PQR
-</h2>
+        <h2 class="text-2xl font-bold">
+            Detalle de PQR
+        </h2>
 
-<a href="/pqr/"
-class="text-sm bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg transition">
-Volver
-</a>
+        <a href="/pqr/" class="text-sm bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg transition">
+            Volver
+        </a>
 
-</div>
-
-
-<div class="bg-slate-900/60 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-lg p-8 space-y-6">
+    </div>
 
 
-<!-- Titulo -->
-
-<div>
-
-<p class="text-xs text-gray-400 uppercase tracking-wider mb-1">
-Título
-</p>
-
-<h3 class="text-xl font-semibold text-gray-200">
-{{ pqr.title }}
-</h3>
-
-</div>
+    <div class="bg-slate-900/60 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-lg p-8 space-y-6">
 
 
-<!-- Descripcion -->
+        <!-- Titulo -->
 
-<div>
+        <div>
 
-<p class="text-xs text-gray-400 uppercase tracking-wider mb-1">
-Descripción
-</p>
+            <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">
+                Título
+            </p>
 
-<p class="text-gray-300 leading-relaxed">
-{{ pqr.description }}
-</p>
+            <h3 class="text-xl font-semibold text-gray-200">
+                {{ pqr.title }}
+            </h3>
 
-</div>
-
-
-<!-- Estado -->
-
-<div>
-
-<p class="text-xs text-gray-400 uppercase tracking-wider mb-2">
-Estado
-</p>
-
-{% if pqr.status == "open" %}
-
-<span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs font-medium">
-Abierto
-</span>
-
-{% elif pqr.status == "process" %}
-
-<span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs font-medium">
-En proceso
-</span>
-
-{% else %}
-
-<span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-medium">
-Cerrado
-</span>
-
-{% endif %}
-
-</div>
+        </div>
 
 
-<!-- Fecha -->
+        <!-- Descripcion -->
 
-<div>
+        <div>
 
-<p class="text-xs text-gray-400 uppercase tracking-wider mb-1">
-Fecha de creación
-</p>
+            <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">
+                Descripción
+            </p>
 
-<p class="text-gray-400 text-sm">
-{{ pqr.created_at }}
-</p>
+            <p class="text-gray-300 leading-relaxed">
+                {{ pqr.description }}
+            </p>
 
-</div>
-
-
-<!-- Acciones -->
-
-<div class="pt-6 border-t border-slate-700 flex gap-4">
-
-<a href="/pqr/{{pqr.id}}/delete"
-class="bg-red-600 hover:bg-red-500 px-5 py-2 rounded-lg text-sm transition">
-
-Eliminar
-
-</a>
-
-<a href="/pqr/"
-class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2 rounded-lg text-sm transition">
-
-Volver al listado
-
-</a>
-
-</div>
+        </div>
 
 
-</div>
+        <!-- Estado -->
+
+        <div>
+
+            <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">
+                Estado
+            </p>
+
+            {% if pqr.status == "open" %}
+
+            <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs font-medium">
+                Abierto
+            </span>
+
+            {% elif pqr.status == "process" %}
+
+            <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs font-medium">
+                En proceso
+            </span>
+
+            {% else %}
+
+            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-medium">
+                Cerrado
+            </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Fecha -->
+
+        <div>
+
+            <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">
+                Fecha de creación
+            </p>
+
+            <p class="text-gray-400 text-sm">
+                {{ pqr.created_at }}
+            </p>
+
+        </div>
+
+
+        <!-- Acciones -->
+
+        <div class="pt-6 border-t border-slate-700 flex gap-4">
+
+            <a href="/pqr/{{pqr.id}}/delete"
+                class="bg-red-600 hover:bg-red-500 px-5 py-2 rounded-lg text-sm transition">
+
+                Eliminar
+
+            </a>
+
+            <a href="/pqr/" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2 rounded-lg text-sm transition">
+
+                Volver al listado
+
+            </a>
+
+        </div>
+
+
+    </div>
 
 </div>
 

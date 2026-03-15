@@ -4,97 +4,97 @@
 
 <div class="flex justify-between items-center mb-8">
 
-<h2 class="text-2xl font-bold">
-Gestión de PQR
-</h2>
+    <h2 class="text-2xl font-bold">
+        Gestión de PQR
+    </h2>
 
-<a href="/pqr/create/" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2 rounded-lg text-sm">
-Nueva PQR
-</a>
+    <a href="/pqr/create/" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2 rounded-lg text-sm">
+        Nueva PQR
+    </a>
 
 </div>
 
 <div class="bg-slate-900/60 backdrop-blur rounded-xl border border-slate-700 overflow-hidden">
 
-<table class="w-full">
+    <table class="w-full">
 
-<thead class="bg-slate-800 text-gray-400 text-sm">
+        <thead class="bg-slate-800 text-gray-400 text-sm">
 
-<tr>
+            <tr>
 
-<th class="p-4 text-left">Título</th>
+                <th class="p-4 text-left">Título</th>
 
-<th class="p-4 text-left">Estado</th>
+                <th class="p-4 text-left">Estado</th>
 
-<th class="p-4 text-left">Fecha</th>
+                <th class="p-4 text-left">Fecha</th>
 
-<th class="p-4 text-left">Acciones</th>
+                <th class="p-4 text-left">Acciones</th>
 
-</tr>
+            </tr>
 
-</thead>
+        </thead>
 
-<tbody>
+        <tbody>
 
-{% for item in pqr %}
+            {% for item in pqr %}
 
-<tr class="border-t border-slate-700 hover:bg-slate-800 transition">
+            <tr class="border-t border-slate-700 hover:bg-slate-800 transition">
 
-<td class="p-4">
+                <td class="p-4">
 
-{{ item.title }}
+                    {{ item.title }}
 
-</td>
+                </td>
 
-<td class="p-4">
+                <td class="p-4">
 
-{% if item.status == "open" %}
+                    {% if item.status == "open" %}
 
-<span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs">
-Abierto
-</span>
+                    <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs">
+                        Abierto
+                    </span>
 
-{% elif item.status == "process" %}
+                    {% elif item.status == "process" %}
 
-<span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs">
-En proceso
-</span>
+                    <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs">
+                        En proceso
+                    </span>
 
-{% else %}
+                    {% else %}
 
-<span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs">
-Cerrado
-</span>
+                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs">
+                        Cerrado
+                    </span>
 
-{% endif %}
+                    {% endif %}
 
-</td>
+                </td>
 
-<td class="p-4 text-gray-400 text-sm">
+                <td class="p-4 text-gray-400 text-sm">
 
-{{ item.created_at }}
+                    {{ item.created_at }}
 
-</td>
+                </td>
 
-<td class="p-4 space-x-3 text-sm">
+                <td class="p-4 space-x-3 text-sm">
 
-<a href="/pqr/{{item.id}}" class="text-indigo-400 hover:text-indigo-300">
-Ver
-</a>
+                    <a href="/pqr/{{item.id}}" class="text-indigo-400 hover:text-indigo-300">
+                        Ver
+                    </a>
 
-<a href="/pqr/{{item.id}}/delete" class="text-red-400 hover:text-red-300">
-Eliminar
-</a>
+                    <a href="/pqr/{{item.id}}/delete" class="text-red-400 hover:text-red-300">
+                        Eliminar
+                    </a>
 
-</td>
+                </td>
 
-</tr>
+            </tr>
 
-{% endfor %}
+            {% endfor %}
 
-</tbody>
+        </tbody>
 
-</table>
+    </table>
 
 </div>
 
