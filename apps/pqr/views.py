@@ -1,6 +1,28 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import PQR
+from .serializers import PQRSerializer
 
-# Create your views here.
+class PQRViewSet(viewsets.ModelViewSet):
+
+    queryset = PQR.objects.all()
+    serializer_class = PQRSerializer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+""" from django.shortcuts import render
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import PQR
 from .forms import PQRForm
@@ -28,4 +50,6 @@ def pqr_detail(request,id):
 def pqr_delete(request,id):
     pqr = get_object_or_404(PQR,id=id)
     pqr.delete()
-    return redirect('pqr_list')
+    return redirect('pqr_list') """
+
+
