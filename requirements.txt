@@ -1,0 +1,9 @@
+Django==6.0.3
+djangorestframework
+drf-spectacular
+gunicorn
+whitenoise
+psycopg2-binary
+python-dotenv
+pytest
+pytest-django
