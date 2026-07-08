@@ -2,10 +2,13 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
+from apps.pqr import views as pqr_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     # WEB
+    path('', pqr_views.landing_login, name='landing_login'),
     path('pqr/', include('apps.pqr.urls')),
     path('reservations/', include('apps.reservations.urls')),
 

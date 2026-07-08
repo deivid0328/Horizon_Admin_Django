@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Admin | Iniciar sesión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top left, #1d4ed8 0%, #0f172a 45%, #020617 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-100">
+    <div class="min-h-screen flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-slate-900/70 shadow-2xl backdrop-blur-xl">
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr]">
+                <div class="relative flex flex-col justify-between bg-gradient-to-br from-blue-600/90 to-violet-600/80 p-10 lg:p-14">
+                    <div>
+                        <div class="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-3 py-1 text-sm font-medium text-blue-50">
+                            Horizon Admin
+                        </div>
+                        <h1 class="mt-6 text-4xl font-bold leading-tight sm:text-5xl">
+                            Gestiona tu comunidad con una experiencia moderna y segura.
+                        </h1>
+                        <p class="mt-4 max-w-xl text-lg text-blue-50/90">
+                            Centraliza PQR, reservas y operaciones del edificio desde una sola plataforma.
+                        </p>
+                    </div>
+                    <div class="mt-10 rounded-2xl border border-white/20 bg-white/10 p-5 text-sm text-blue-50/90">
+                        <p class="font-semibold">Acceso rápido</p>
+                    </div>
+                </div>
+
+                <div class="p-8 sm:p-10 lg:p-12">
+                    <div class="mb-8">
+                        <p class="text-sm font-semibold uppercase tracking-[0.32em] text-blue-400">Inicio de sesión</p>
+                        <h2 class="mt-2 text-3xl font-semibold text-white">Bienvenido de nuevo</h2>
+                        <p class="mt-2 text-sm text-slate-400">Accede a la plataforma para administrar tus procesos.</p>
+                    </div>
+
+                    {% if errors %}
+                        <div class="mb-6 rounded-2xl border border-red-400/30 bg-red-500/10 p-4 text-sm text-red-200">
+                            <ul class="list-disc space-y-1 pl-5">
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <form method="post" class="space-y-5">
+                        {% csrf_token %}
+                        <div>
+                            <label for="email" class="mb-2 block text-sm font-medium text-slate-300">Correo electrónico</label>
+                            <input id="email" name="email" type="email" value="{{ email|default:'' }}" required placeholder="tu@empresa.com" class="w-full rounded-2xl border border-slate-700 bg-slate-800/80 px-4 py-3 text-white outline-none ring-0 transition focus:border-blue-500 focus:bg-slate-800" />
+                        </div>
+                        <div>
+                            <label for="password" class="mb-2 block text-sm font-medium text-slate-300">Contraseña</label>
+                            <input id="password" name="password" type="password" required placeholder="Ingresa cualquier contraseña" class="w-full rounded-2xl border border-slate-700 bg-slate-800/80 px-4 py-3 text-white outline-none ring-0 transition focus:border-blue-500 focus:bg-slate-800" />
+                        </div>
+                        <button type="submit" class="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-violet-500 px-4 py-3 font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:opacity-90">
+                            Iniciar sesión
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

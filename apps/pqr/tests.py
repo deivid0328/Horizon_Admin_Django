@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
@@ -17,8 +18,27 @@ class PQRModelTest(TestCase):
         self.assertEqual(str(pqr), "Daño ascensor")
 
 
+class LandingLoginTest(TestCase):
+    def test_landing_login_with_valid_email_redirects_to_pqr(self):
+        response = self.client.post(
+            reverse("landing_login"),
+            {"email": "demo@horizon.com", "password": "cualquier-password"},
+            follow=True,
+        )
+
+        self.assertRedirects(response, reverse("pqr_list"))
+        self.assertTrue(get_user_model().objects.filter(email="demo@horizon.com").exists())
+        self.assertTrue(response.wsgi_request.user.is_authenticated)
+
+
 class PQRViewTest(TestCase):
     def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            username="admin",
+            email="admin@horizon.com",
+            password="123456",
+        )
+        self.client.force_login(self.user)
         self.pqr = PQR.objects.create(
             title="Fuga de agua",
             description="Hay fuga en el baño",
