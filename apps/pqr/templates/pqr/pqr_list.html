@@ -1,101 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="space-y-6">
+  <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div>
+      <p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">Módulo</p>
+      <h2 class="text-3xl font-semibold text-white">Gestión de PQR</h2>
+      <p class="mt-1 text-sm text-slate-400">Administra solicitudes, seguimientos y estados.</p>
+    </div>
 
-<div class="flex justify-between items-center mb-8">
-
-    <h2 class="text-2xl font-bold">
-        Gestión de PQR
-    </h2>
-
-    <a href="/pqr/create/" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2 rounded-lg text-sm">
-        Nueva PQR
+    <a href="{% url 'pqr_create' %}" class="rounded-xl bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:bg-indigo-400">
+      Nueva PQR
     </a>
+  </div>
 
-</div>
-
-<div class="bg-slate-900/60 backdrop-blur rounded-xl border border-slate-700 overflow-hidden">
-
-    <table class="w-full">
-
-        <thead class="bg-slate-800 text-gray-400 text-sm">
-
-            <tr>
-
-                <th class="p-4 text-left">Título</th>
-
-                <th class="p-4 text-left">Estado</th>
-
-                <th class="p-4 text-left">Fecha</th>
-
-                <th class="p-4 text-left">Acciones</th>
-
-            </tr>
-
+  <div class="glass-card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm text-slate-300">
+        <thead class="bg-slate-800/80 text-xs uppercase tracking-[0.2em] text-slate-400">
+          <tr>
+            <th class="p-4 text-left">Título</th>
+            <th class="p-4 text-left">Estado</th>
+            <th class="p-4 text-left">Fecha</th>
+            <th class="p-4 text-left">Acciones</th>
+          </tr>
         </thead>
-
         <tbody>
-
-            {% for item in pqr %}
-
-            <tr class="border-t border-slate-700 hover:bg-slate-800 transition">
-
-                <td class="p-4">
-
-                    {{ item.title }}
-
-                </td>
-
-                <td class="p-4">
-
-                    {% if item.status == "open" %}
-
-                    <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs">
-                        Abierto
-                    </span>
-
-                    {% elif item.status == "process" %}
-
-                    <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs">
-                        En proceso
-                    </span>
-
-                    {% else %}
-
-                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs">
-                        Cerrado
-                    </span>
-
-                    {% endif %}
-
-                </td>
-
-                <td class="p-4 text-gray-400 text-sm">
-
-                    {{ item.created_at }}
-
-                </td>
-
-                <td class="p-4 space-x-3 text-sm">
-
-                    <a href="/pqr/{{item.id}}" class="text-indigo-400 hover:text-indigo-300">
-                        Ver
-                    </a>
-
-                    <a href="/pqr/{{item.id}}/delete" class="text-red-400 hover:text-red-300">
-                        Eliminar
-                    </a>
-
-                </td>
-
-            </tr>
-
-            {% endfor %}
-
+          {% for item in pqr %}
+          <tr class="border-t border-slate-800/80 transition hover:bg-slate-800/60">
+            <td class="p-4 font-medium text-slate-100">{{ item.title }}</td>
+            <td class="p-4">
+              {% if item.status == "open" %}
+              <span class="rounded-full bg-blue-500/20 px-3 py-1 text-xs text-blue-400">Abierto</span>
+              {% elif item.status == "process" %}
+              <span class="rounded-full bg-yellow-500/20 px-3 py-1 text-xs text-yellow-400">En proceso</span>
+              {% else %}
+              <span class="rounded-full bg-green-500/20 px-3 py-1 text-xs text-green-400">Cerrado</span>
+              {% endif %}
+            </td>
+            <td class="p-4 text-slate-400">{{ item.created_at }}</td>
+            <td class="p-4 space-x-3 text-sm">
+              <a href="{% url 'pqr_detail' item.id %}" class="text-indigo-400 hover:text-indigo-300">Ver</a>
+              <a href="{% url 'pqr_delete' item.id %}" class="text-rose-400 hover:text-rose-300">Eliminar</a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" class="p-6 text-center text-slate-400">No hay PQR registradas.</td>
+          </tr>
+          {% endfor %}
         </tbody>
-
-    </table>
-
+      </table>
+    </div>
+  </div>
 </div>
-
 {% endblock %}

@@ -2,60 +2,66 @@
 
 {% block content %}
 <div class="p-6">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold ">Reservas</h1>
+  <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div>
+      <p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">Módulo</p>
+      <h1 class="text-3xl font-semibold text-white">Reservas</h1>
+      <p class="mt-1 text-sm text-slate-400">Administra reservas de áreas comunes con un flujo claro y moderno.</p>
+    </div>
 
     <a href="{% url 'reservation_create' %}" 
-       class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 transition">
+       class="inline-flex items-center justify-center rounded-xl bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:bg-indigo-400">
       + Nueva Reserva
     </a>
   </div>
 
-  <div class="bg-white shadow rounded-2xl overflow-hidden">
-    <table class="min-w-full text-sm text-gray-700">
-      <thead class="bg-gray-100 text-xs uppercase">
-        <tr>
-          <th class="px-4 py-3 text-left">Residente</th>
-          <th class="px-4 py-3 text-left">Área</th>
-          <th class="px-4 py-3 text-left">Fecha</th>
-          <th class="px-4 py-3 text-left">Horario</th>
-          <th class="px-4 py-3 text-left">Estado</th>
-          <th class="px-4 py-3 text-right">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for r in reservations %}
-        <tr class="border-b hover:bg-gray-50">
-          <td class="px-4 py-3">{{ r.resident_name }}</td>
-          <td class="px-4 py-3">{{ r.get_area_display }}</td>
-          <td class="px-4 py-3">{{ r.reservation_date }}</td>
-          <td class="px-4 py-3">
-            {{ r.start_time }} - {{ r.end_time }}
-          </td>
-          <td class="px-4 py-3">
-            <span class="px-2 py-1 rounded text-xs 
-              {% if r.status == 'approved' %} bg-green-100 text-green-700
-              {% elif r.status == 'rejected' %} bg-red-100 text-red-700
-              {% else %} bg-yellow-100 text-yellow-700 {% endif %}">
-              {{ r.get_status_display }}
-            </span>
-          </td>
-          <td class="px-4 py-3 text-right space-x-2">
-            <a href="{% url 'reservation_detail' r.id %}" 
-               class="text-indigo-600 hover:underline">Ver</a>
-            <a href="{% url 'reservation_delete' r.id %}" 
-               class="text-red-600 hover:underline">Eliminar</a>
-          </td>
-        </tr>
-        {% empty %}
-        <tr>
-          <td colspan="6" class="text-center py-6 text-gray-400">
-            No hay reservas registradas
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <div class="glass-card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm text-slate-300">
+        <thead class="bg-slate-800/90 text-xs uppercase tracking-[0.2em] text-slate-400">
+          <tr>
+            <th class="px-4 py-3 text-left">Residente</th>
+            <th class="px-4 py-3 text-left">Área</th>
+            <th class="px-4 py-3 text-left">Fecha</th>
+            <th class="px-4 py-3 text-left">Horario</th>
+            <th class="px-4 py-3 text-left">Estado</th>
+            <th class="px-4 py-3 text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in reservations %}
+          <tr class="border-t border-slate-800/80 transition hover:bg-slate-800/60">
+            <td class="px-4 py-3 font-medium text-slate-100">{{ r.resident_name }}</td>
+            <td class="px-4 py-3">{{ r.get_area_display }}</td>
+            <td class="px-4 py-3">{{ r.reservation_date }}</td>
+            <td class="px-4 py-3">
+              {{ r.start_time }} - {{ r.end_time }}
+            </td>
+            <td class="px-4 py-3">
+              <span class="rounded-full px-3 py-1 text-xs font-medium
+                {% if r.status == 'approved' %} bg-emerald-500/15 text-emerald-400
+                {% elif r.status == 'rejected' %} bg-rose-500/15 text-rose-400
+                {% else %} bg-amber-500/15 text-amber-400 {% endif %}">
+                {{ r.get_status_display }}
+              </span>
+            </td>
+            <td class="px-4 py-3 text-right space-x-3">
+              <a href="{% url 'reservation_detail' r.id %}" 
+                 class="text-indigo-400 transition hover:text-indigo-300">Ver</a>
+              <a href="{% url 'reservation_delete' r.id %}" 
+                 class="text-rose-400 transition hover:text-rose-300">Eliminar</a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="px-4 py-8 text-center text-slate-400">
+              No hay reservas registradas.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 {% endblock %}

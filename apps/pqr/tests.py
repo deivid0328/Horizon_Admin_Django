@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from apps.pqr.models import PQR
+from apps.reservations.models import Reservation
 
 
 class PQRModelTest(TestCase):
@@ -65,6 +66,40 @@ class PQRViewTest(TestCase):
 
         self.assertRedirects(response, reverse("pqr_list"))
         self.assertTrue(PQR.objects.filter(title="Incidencia de luz").exists())
+
+    def test_dashboard_incluye_metricas_utiles(self):
+        Reservation.objects.create(
+            resident_name="Ana García",
+            area="salon",
+            reservation_date="2026-07-15",
+            start_time="10:00",
+            end_time="12:00",
+            status="approved",
+        )
+
+        response = self.client.get(reverse("dashboard"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "pqr/dashboard.html")
+        self.assertContains(response, "Resumen general")
+        self.assertContains(response, "PQR abiertas")
+        self.assertContains(response, "Reservas aprobadas")
+
+    def test_pqr_list_muestra_solo_la_lista(self):
+        response = self.client.get(reverse("pqr_list"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "pqr/pqr_list.html")
+        self.assertContains(response, "Gestión de PQR")
+        self.assertNotContains(response, "Resumen general")
+
+    def test_logout_redirige_al_login(self):
+        self.client.force_login(self.user)
+
+        response = self.client.post(reverse("logout"), follow=True)
+
+        self.assertRedirects(response, reverse("landing_login"))
+        self.assertFalse(response.wsgi_request.user.is_authenticated)
 
     def test_detalle_pqr(self):
         response = self.client.get(reverse("pqr_detail", args=[self.pqr.id]))

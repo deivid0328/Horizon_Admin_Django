@@ -16,9 +16,12 @@ Horizon Admin
 {{ request.user.username }}
 </span>
 
-<button class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm transition">
-Salir
-</button>
+<form method="post" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm transition">
+    Salir
+  </button>
+</form>
 
 </div>
 

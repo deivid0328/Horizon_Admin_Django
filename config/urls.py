@@ -9,6 +9,8 @@ urlpatterns = [
 
     # WEB
     path('', pqr_views.landing_login, name='landing_login'),
+    path('logout/', pqr_views.custom_logout, name='logout'),
+    path('dashboard/', pqr_views.dashboard_view, name='dashboard'),
     path('pqr/', include('apps.pqr.urls')),
     path('reservations/', include('apps.reservations.urls')),
 

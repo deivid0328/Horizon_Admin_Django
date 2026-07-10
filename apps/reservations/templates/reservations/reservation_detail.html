@@ -1,23 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="p-6 max-w-2xl mx-auto">
-  <h1 class="text-2xl font-bold mb-6">Detalle de Reserva</h1>
+<div class="mx-auto max-w-2xl p-6">
+  <div class="mb-6">
+    <p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">Detalle</p>
+    <h1 class="text-3xl font-semibold text-white">Detalle de Reserva</h1>
+  </div>
 
-  <div class="bg-white shadow rounded-2xl p-6 space-y-4 text-gray-700">
-    <p><strong>Residente:</strong> {{ reservation.resident_name }}</p>
-    <p><strong>Área:</strong> {{ reservation.get_area_display }}</p>
-    <p><strong>Fecha:</strong> {{ reservation.reservation_date }}</p>
-    <p><strong>Horario:</strong> {{ reservation.start_time }} - {{ reservation.end_time }}</p>
-    <p><strong>Estado:</strong> {{ reservation.get_status_display }}</p>
+  <div class="glass-card space-y-4 p-6 text-slate-300">
+    <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+      <span class="text-sm font-medium text-slate-400">Residente</span>
+      <span class="text-base font-semibold text-slate-100">{{ reservation.resident_name }}</span>
+    </div>
+    <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+      <span class="text-sm font-medium text-slate-400">Área</span>
+      <span>{{ reservation.get_area_display }}</span>
+    </div>
+    <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+      <span class="text-sm font-medium text-slate-400">Fecha</span>
+      <span>{{ reservation.reservation_date }}</span>
+    </div>
+    <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+      <span class="text-sm font-medium text-slate-400">Horario</span>
+      <span>{{ reservation.start_time }} - {{ reservation.end_time }}</span>
+    </div>
+    <div class="flex items-center justify-between">
+      <span class="text-sm font-medium text-slate-400">Estado</span>
+      <span class="rounded-full bg-indigo-500/15 px-3 py-1 text-sm text-indigo-300">{{ reservation.get_status_display }}</span>
+    </div>
   </div>
 
   <div class="mt-6 flex gap-2">
     <a href="{% url 'reservation_list' %}" 
-       class="px-4 py-2  bg-white text-gray-700 rounded-lg">Volver</a>
+       class="rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-2.5 text-sm text-slate-300 transition hover:bg-slate-700">Volver</a>
 
     <a href="{% url 'reservation_delete' reservation.id %}" 
-       class="px-4 py-2 bg-red-600 text-white rounded-lg">Eliminar</a>
+       class="rounded-xl bg-rose-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-rose-400">Eliminar</a>
   </div>
 </div>
 {% endblock %}

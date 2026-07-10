@@ -1,8 +1,10 @@
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.shortcuts import render, redirect, get_object_or_404
+
+from apps.reservations.models import Reservation
 
 from .forms import PQRForm
 from .models import PQR
@@ -36,15 +38,42 @@ def landing_login(request):
         user.save(update_fields=["username", "password"])
 
         login(request, user)
-        next_url = request.GET.get("next") or "pqr_list"
+        next_url = request.GET.get("next") or "dashboard"
         return redirect(next_url)
 
     return render(request, "landing_login.html")
 
 
+def custom_logout(request):
+    logout(request)
+    return redirect("landing_login")
+
+
+@login_required(login_url="landing_login")
+def dashboard_view(request):
+    pqr = PQR.objects.all().order_by("-created_at")
+    reservations = Reservation.objects.all().order_by("-created_at")
+
+    dashboard_stats = {
+        "total_pqr": pqr.count(),
+        "pqr_open": pqr.filter(status="open").count(),
+        "pqr_process": pqr.filter(status="process").count(),
+        "pqr_closed": pqr.filter(status="closed").count(),
+        "reservations_total": reservations.count(),
+        "reservations_approved": reservations.filter(status="approved").count(),
+        "reservations_pending": reservations.filter(status="pending").count(),
+    }
+
+    return render(
+        request,
+        "pqr/dashboard.html",
+        {"pqr": pqr[:5], "reservations": reservations[:5], "dashboard_stats": dashboard_stats},
+    )
+
+
 @login_required(login_url="landing_login")
 def pqr_list(request):
-    pqr = PQR.objects.all()
+    pqr = PQR.objects.all().order_by("-created_at")
     return render(request, "pqr/pqr_list.html", {"pqr": pqr})
 
 

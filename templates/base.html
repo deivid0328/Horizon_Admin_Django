@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,32 +10,11 @@
 <title>Horizon Admin</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-body{
-background: linear-gradient(135deg,#0f172a,#1e293b);
-}
-
-
-input, textarea, select{
-
-transition: all .2s ease;
-
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-
-box-shadow: 0 0 0 2px rgba(99,102,241,.4);
-
-}
-
-</style>
+<link rel="stylesheet" href="{% static 'css/stayle.css' %}">
 
 </head>
 
-<body class="text-gray-200">
+<body class="text-slate-200">
 
 <div class="flex h-screen overflow-hidden">
 
